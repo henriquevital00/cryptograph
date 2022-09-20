@@ -1,5 +1,6 @@
 import hashlib
 
+# primeiro listamos todas as frases de teste, bem como as frases template para termos um exemplo comparativo
 test_array = [
     {
         "frase": "A primeira das instituições criadas por Pe. Roberto Sabóia de Medeiros foi a antiga Escola Superior "
@@ -85,9 +86,13 @@ test_array = [
 print("Iniciando validação das frases...")
 print("===============================================================================================")
 for test_obj in test_array:
+    # primeiro foi gerado um sha256 e um md5 sobre cada frase de teste, a partir disso
+    # realizamos uma comparação entre os valores dados no enunciado e os gerados pela lib hash
+    # a partir do resultado temos um booleano indicando se é valido ou não
     sha256_valid = True if hashlib.sha256(test_obj["frase"].encode()).hexdigest() == test_obj["sha256"] else False
     md5_valid = True if hashlib.md5(test_obj["frase"].encode()).hexdigest() == test_obj["md5"] else False
 
+    # A frase é então validada, de acordo com os sha256 e md5 recebidos
     print("A frase: \"" + str(test_obj["frase"] +
                               "\"\npossui um sha256 válido? " + str(sha256_valid)
                               + " e um md5 valido? " + str(md5_valid)))
